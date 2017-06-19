@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace AForge.Wpf
 {
@@ -10,6 +11,11 @@ namespace AForge.Wpf
         public Presenter()
         {
             InitializeComponent();
+        }
+
+        private void TextInput_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextInput.ScrollToEnd();
         }
     }
 }

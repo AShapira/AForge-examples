@@ -44,6 +44,7 @@ namespace AForge.Wpf
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             StopCamera();
+            Presenter.Close();
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)

@@ -32,8 +32,9 @@
             AcceptsReturn="True"
             MaxLines="2"
             MinLines="2"
-            TextChanged="TextInput_OnTextChanged" ClipToBounds="True"
-            
+            TextChanged="TextInput_OnTextChanged" 
+            ClipToBounds="True" 
+            SelectionBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" BorderThickness="0"
             >
             <TextBox.Effect>
                 <DropShadowEffect ShadowDepth="4" Opacity="0.8" Direction="0"/>

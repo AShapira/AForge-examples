@@ -6,14 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="MainWindow"
         Width="422.669"
-        Height="350"
+        Height="350" Loaded="MainWindow_OnLoaded"
         mc:Ignorable="d">
     <Grid>
-        <Image x:Name="videoPlayer" Margin="10,0,10,70" />
         <ComboBox x:Name="comboBox"
                   Width="167"
                   Height="21"
-                  Margin="10,0,0,25"
+                  Margin="14,0,0,264.8"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Bottom"
                   DisplayMemberPath="Name"
@@ -21,23 +20,30 @@
                   SelectedItem="{Binding CurrentDevice}" />
         <Label Width="167"
                Height="24"
-               Margin="10,0,0,46"
+               Margin="14,0,0,285.8"
                HorizontalAlignment="Left"
                VerticalAlignment="Bottom"
                Content="Select video source" />
         <Button Width="67"
                 Height="21"
-                Margin="213,0,0,25"
+                Margin="217,0,0,264.8"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Click="btnStart_Click"
                 Content="Start" />
         <Button Width="67"
                 Height="21"
-                Margin="296,0,0,25"
+                Margin="300,0,0,264.8"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Click="btnStop_Click"
                 Content="Stop" />
+        <ListBox HorizontalAlignment="Left" Height="100" Margin="28,110,0,0" VerticalAlignment="Top" Width="339"/>
+        <Label Width="167"
+            Height="24"
+            Margin="14,0,0,217.8"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Select banner" />
     </Grid>
 </Window>

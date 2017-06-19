@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
@@ -26,36 +17,31 @@ namespace AForge.Wpf
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-
-        #region Public properties
-
         public ObservableCollection<FilterInfo> VideoDevices { get; set; }
 
         public FilterInfo CurrentDevice
         {
-            get { return _currentDevice; }
-            set { _currentDevice = value; this.OnPropertyChanged("CurrentDevice"); }
+            get => _currentDevice;
+            set { _currentDevice = value; OnPropertyChanged("CurrentDevice"); }
         }
         private FilterInfo _currentDevice;
 
-        #endregion
+        public Presenter Presenter { get; set; }
 
-
-        #region Private fields
 
         private IVideoSource _videoSource;
-
-        #endregion
 
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
+            DataContext = this;
+
             GetVideoDevices();
-            this.Closing += MainWindow_Closing;
+            Closing += MainWindow_Closing;
+
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             StopCamera();
         }
@@ -65,7 +51,7 @@ namespace AForge.Wpf
             StartCamera();
         }
 
-        private void video_NewFrame(object sender, Video.NewFrameEventArgs eventArgs)
+        private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             try
             {
@@ -75,7 +61,7 @@ namespace AForge.Wpf
                     bi = bitmap.ToBitmapImage();
                 }
                 bi.Freeze(); // avoid cross thread operations and prevents leaks
-                Dispatcher.BeginInvoke(new ThreadStart(delegate { videoPlayer.Source = bi; }));
+                Dispatcher.BeginInvoke(new ThreadStart(delegate { Presenter.VideoPlayer.Source = bi; }));
             }
             catch (Exception exc)
             {
@@ -121,24 +107,35 @@ namespace AForge.Wpf
             if (_videoSource != null && _videoSource.IsRunning)
             {
                 _videoSource.SignalToStop();
-                _videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
+                _videoSource.NewFrame -= video_NewFrame;
             }
         }
-
-        #region INotifyPropertyChanged members
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
+            PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
             {
                 var e = new PropertyChangedEventArgs(propertyName);
                 handler(this, e);
             }
-        } 
+        }
 
-        #endregion
+        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+
+            FileInfo bannerPath = new FileInfo($"Resources/{Settings.Default.BannerPath[0]}.png");
+            FileInfo logoPath = new FileInfo($"Resources/{Settings.Default.LogoPath}.png");
+            Presenter = new Presenter
+            {
+                Presentation = {Source = new BitmapImage(new Uri(bannerPath.FullName))},
+                Logo = {Source = new BitmapImage(new Uri(logoPath.FullName))}
+            };
+            Presenter.Show();
+            
+
+        }
     }
 }

@@ -20,20 +20,25 @@
             x:FieldModifier="public" 
             Panel.ZIndex="10" 
             VerticalAlignment="Top" 
-            Margin="50,160,49.8,0" 
+            Margin="100,160,100,0" 
             Background="#3FE6E4E4" 
             BorderBrush="#66ABADB3" 
             Foreground="White" 
-            FontSize="48" 
+            FontSize="72" 
             FontWeight="Bold" 
             FontFamily="David" 
             Height="140"
             TextWrapping="Wrap"
             AcceptsReturn="True"
-            MaxLines="3"
-            MinLines="3"
-            TextChanged="TextInput_OnTextChanged"
-            ></TextBox>
+            MaxLines="2"
+            MinLines="2"
+            TextChanged="TextInput_OnTextChanged" ClipToBounds="True"
+            
+            >
+            <TextBox.Effect>
+                <DropShadowEffect ShadowDepth="4" Opacity="0.8" Direction="0"/>
+            </TextBox.Effect>
+        </TextBox>
         <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch" />
         <Image x:Name="Presentation"  x:FieldModifier="public" Grid.Column="2" Margin="10,5,10,5" />
     </Grid>

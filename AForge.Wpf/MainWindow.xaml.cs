@@ -135,8 +135,20 @@ namespace AForge.Wpf
                 Logo = {Source = new BitmapImage(new Uri(logoPath.FullName))}
             };
             Presenter.Show();
-            
 
+            this.Banners.ItemsSource = Settings.Default.BannerPath;
+            this.Banners.SelectionChanged += Banners_SelectionChanged;
+
+
+        }
+
+        private void Banners_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            FileInfo logoPath = new FileInfo($"Resources/{this.Banners.SelectedItems[0]}.png");
+            if (logoPath.Exists)
+            {
+                Presenter.Presentation.Source = new BitmapImage(new Uri(logoPath.FullName));
+            }
         }
     }
 }

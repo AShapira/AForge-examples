@@ -38,7 +38,8 @@
                 VerticalAlignment="Bottom"
                 Click="btnStop_Click"
                 Content="Stop" />
-        <ListBox HorizontalAlignment="Left" Height="100" Margin="28,110,0,0" VerticalAlignment="Top" Width="339"/>
+        <ListBox x:Name="Banners" HorizontalAlignment="Left" Height="100" Margin="14,110,0,0" VerticalAlignment="Top" Width="353">
+        </ListBox>
         <Label Width="167"
             Height="24"
             Margin="14,0,0,217.8"

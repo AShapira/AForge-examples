@@ -15,7 +15,7 @@ namespace AForge.Wpf
 
         private void TextInput_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            TextInput.ScrollToEnd();
+            //TextInput.ScrollToEnd();
         }
     }
 }

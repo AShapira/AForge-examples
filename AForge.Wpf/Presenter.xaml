@@ -12,15 +12,16 @@
             <ColumnDefinition Width="2" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Image x:Name="VideoPlayer" Grid.Column="0" x:FieldModifier="public" Margin="10,5,10,5" Panel.ZIndex="0"/>
-        <Image x:Name="Logo" Grid.Column="0" x:FieldModifier="public" Panel.ZIndex="1" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" />
+        <Image x:Name="VideoPlayer" Grid.Column="0" x:FieldModifier="public" Margin="10,5,10,5" Panel.ZIndex="0" VerticalAlignment="Top"/>
+        <Image x:Name="Logo" Grid.Column="0" x:FieldModifier="public" Panel.ZIndex="1" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,10,0,0"  >
+        </Image>
         <TextBox 
             x:Name="TextInput" 
             Grid.Column="0" 
             x:FieldModifier="public" 
             Panel.ZIndex="10" 
             VerticalAlignment="Top" 
-            Margin="100,160,100,0" 
+            Margin="80,20,80,0" 
             Background="#3FE6E4E4" 
             BorderBrush="#66ABADB3" 
             Foreground="White" 
